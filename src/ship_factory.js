@@ -37,14 +37,6 @@ const ship = (playerNumber) => {
       }
     ]
   }
-
-  // update hit on ship position
-  function addHit (ship, hitPosition, row, column) {
-    // code to add the hit
-    ship.hitPosition = [row, column, 'hit'];
-    isSunk(ship);
-  }
-
   // 10x10 grid (a-j x 1-10)
   const hit = (row, column, targetPlayer) => {
     for (let i = 0; i < targetPlayer.fleet.ships.length; i++) {
