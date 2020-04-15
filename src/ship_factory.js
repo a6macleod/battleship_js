@@ -37,22 +37,42 @@ const ship = (playerNumber) => {
       }
     ]
   }
+
+  // update hit on ship position
+  function addHit (ship, hitPosition, row, column) {
+    // code to add the hit
+    ship.hitPosition = [row, column, 'hit'];
+    isSunk(ship);
+  }
+
   // 10x10 grid (a-j x 1-10)
   const hit = (row, column, targetPlayer) => {
-    // code for transfering the hit spot to the ship
-    let ships = targetPlayer.fleet.ships
-    for (let i = 0; i < ships.length; i++) {
-      let ship = ships[i];
-      for (let i = 0; i < ship.position.length; i++)
+    for (let i = 0; i < targetPlayer.fleet.ships.length; i++) {
+      let ship = targetPlayer.fleet.ships[i];
+      for (let i = 0; i < ship.position.length; i++) {
         if (ship.position[i][0] === row || ship.position[i][1] === column) {
           return true;
         } else {
           return false; 
         }
+      }
     }
   }
-  const isSunk = () => {
+  const isSunk = (ship) => {
     // code to update the ship to being sunk
+    // input the ship
+    // check how many hits are on the ship
+    // return true / false to isSunk
+    let hits = 0;
+    for (let i = 0; i < ship.position.length; i++) {
+      if (ship.position[i].includes('hit')) {
+        hits += 1;
+      }
+    }
+    if (hits === ship.position.length) {
+      ship.sunk = true;
+    }
+    return ship.sunk;
   }
   return {fleet, hit, isSunk}
 }

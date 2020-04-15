@@ -28,8 +28,11 @@ test('is the ship sunk?', () => {
   let playerTwo = ship(2);
 
   // hit twice and sink the patrol boat
-  playerTwo.hit('b',1,playerTwo);
-  playerTwo.hit('b',2,playerTwo);
-  expect(playerTwo.isSunk()).toBe();
+  playerTwo.hit('e',1,playerTwo);
+  playerTwo.fleet.ships[4].position[0].push('hit');
+  playerTwo.hit('e',2,playerTwo)
+  playerTwo.fleet.ships[4].position[1].push('hit');
+  expect(playerTwo.isSunk(playerTwo.fleet.ships[4])).toBe(true);
+
 
 });
