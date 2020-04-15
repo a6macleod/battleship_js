@@ -33,6 +33,4 @@ test('is the ship sunk?', () => {
   playerTwo.hit('e',2,playerTwo)
   playerTwo.fleet.ships[4].position[1].push('hit');
   expect(playerTwo.isSunk(playerTwo.fleet.ships[4])).toBe(true);
-
-
 });

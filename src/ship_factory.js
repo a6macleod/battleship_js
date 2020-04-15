@@ -49,8 +49,8 @@ const ship = (playerNumber) => {
   const hit = (row, column, targetPlayer) => {
     for (let i = 0; i < targetPlayer.fleet.ships.length; i++) {
       let ship = targetPlayer.fleet.ships[i];
-      for (let i = 0; i < ship.position.length; i++) {
-        if (ship.position[i][0] === row || ship.position[i][1] === column) {
+      for (let j = 0; j < ship.position.length; j++) {
+        if (ship.position[j][0] === row || ship.position[j][1] === column) {
           return true;
         } else {
           return false; 
@@ -59,10 +59,6 @@ const ship = (playerNumber) => {
     }
   }
   const isSunk = (ship) => {
-    // code to update the ship to being sunk
-    // input the ship
-    // check how many hits are on the ship
-    // return true / false to isSunk
     let hits = 0;
     for (let i = 0; i < ship.position.length; i++) {
       if (ship.position[i].includes('hit')) {
