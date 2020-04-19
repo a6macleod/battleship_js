@@ -1,10 +1,18 @@
 import React from 'react';
 
+function placeShip (length) {
+  // find a random letter a-j
+  // find a random number 1-10
+  // pick a direction; up or down
+  // if the ship fits set the place
+  // if it doesn't fit, start over and find a random letter
+  const rows = 'abcdefghij';
+  const number = Math.floor(Math.random() * Math.floor(9) + 1);
+}
+
 // Ships: Carrier (5); Battleship (4); Destroyer (3); Submarine (3); Patrol Boat (2)
 const ship = (playerNumber) => {
-  const fleet = {
-    playerNumber: playerNumber,
-    ships:[
+  const ships = [
       {
         name: 'carrier',
         length: 5,
@@ -36,19 +44,23 @@ const ship = (playerNumber) => {
         sunk: false
       }
     ]
-  }
+
+    function markHit (ship, hitLocation) {
+      hitLocation.push('hit');
+      isSunk(ship);
+    }
+
   // 10x10 grid (a-j x 1-10)
-  const hit = (row, column, targetPlayer) => {
-    for (let i = 0; i < targetPlayer.fleet.ships.length; i++) {
-      let ship = targetPlayer.fleet.ships[i];
-      for (let j = 0; j < ship.position.length; j++) {
-        if (ship.position[j][0] === row || ship.position[j][1] === column) {
+  const hit = (row, column) => {
+    for (let i = 0; i < ships.length; i++) {
+      for (let j = 0; j < ships[i].position.length; j++) {
+        if (ships[i].position[j][0] === row && ships[i].position[j][1] === column) {
+          markHit(ships[i], ships[i].position[j]);
           return true;
-        } else {
-          return false; 
         }
       }
     }
+    return false;
   }
   const isSunk = (ship) => {
     let hits = 0;
@@ -62,7 +74,7 @@ const ship = (playerNumber) => {
     }
     return ship.sunk;
   }
-  return {fleet, hit, isSunk}
+  return {ships, hit, isSunk}
 }
 
 export default ship;
