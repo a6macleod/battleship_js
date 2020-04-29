@@ -1,14 +1,5 @@
 import React from 'react';
-
-function placeShip (length) {
-  // find a random letter a-j
-  // find a random number 1-10
-  // pick a direction; up or down
-  // if the ship fits set the place
-  // if it doesn't fit, start over and find a random letter
-  const rows = 'abcdefghij';
-  const number = Math.floor(Math.random() * Math.floor(9) + 1);
-}
+import placeShip from './place_ships.js';
 
 // Ships: Carrier (5); Battleship (4); Destroyer (3); Submarine (3); Patrol Boat (2)
 const ship = (playerNumber) => {
@@ -16,31 +7,31 @@ const ship = (playerNumber) => {
       {
         name: 'carrier',
         length: 5,
-        position: [['a',1],['a',2],['a',3],['a',4],['a',5]],
+        position: placeShip(5),
         sunk: false
         },
       {
         name: 'Battleship',
         length: 4,
-        position: [['b',1],['b',2],['b',3],['b',4]],
+        position: placeShip(4),
         sunk: false
       },
       {
         name: 'Destroyer',
         length: 3,
-        position: [['c',1],['c',2],['c',3]],
+        position: placeShip(3),
         sunk: false
       },
       {
         name: 'Submarine',
         length: 3,
-        position: [['d',1],['d',2],['d',3]],
+        position: placeShip(3),
         sunk: false
       },
       {
         name: 'Patrol Boat',
         length: 2,
-        position: [['e',1],['e',2]],
+        position: placeShip(2),
         sunk: false
       }
     ]
