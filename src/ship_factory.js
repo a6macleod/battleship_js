@@ -53,16 +53,16 @@ const ship = (playerNumber) => {
     }
     return false;
   }
+
+  function isHit(position) {
+    return position.includes('hit')
+  }
+
   const isSunk = (ship) => {
-    let hits = 0;
-    for (let i = 0; i < ship.position.length; i++) {
-      if (ship.position[i].includes('hit')) {
-        hits += 1;
-      }
-    }
-    if (hits === ship.position.length) {
+    if (ship.position.every(isHit)) {
       ship.sunk = true;
     }
+
     return ship.sunk;
   }
   return {ships, hit, isSunk}
