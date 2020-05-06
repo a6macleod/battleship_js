@@ -1,67 +1,103 @@
 const rowList = ['a','b','c','d','e','f','g','h','i','j'];
+let allShips = {}
 
 function newStartingPoint () {
-  // find a random letter a-j
-  // find a random number 1-10
-  const number = Math.floor(Math.random() * Math.floor(rowList.length));
+  // find a random number 1-10 & random letter a-j
+  const number = Math.floor(Math.random() * 10);
   let row = rowList[Math.floor(Math.random()*rowList.length)];
   return [row,number];
 }
 
-function setVerticalPosition(length) {
+function setPosition(length) {
   let startingPosition = newStartingPoint();
-  // code to fit the ship in vertically
-  const startingRowIndex = rowList.indexOf(startingPosition[0])
   let position = [startingPosition];
-  for (let i = 1; i < length; i++) {
-    // find starting position 
-    let rowLetter = rowList[startingRowIndex + i];
-    position.push([rowLetter,startingPosition[1]]);
-  }
-  return position
-}
+  const horizontal = () => ((Math.random() < 0.5) >= 0.5) ? true : false;
 
-function setHorizontalPosition(length) {
-  let startingPosition = newStartingPoint();
-  // code to fit the ship in horizontally
-    let position = [startingPosition];
+  if (horizontal === true) {
     for (let i = 1; i < length; i++) {
       let columnNumber = startingPosition[1] + i;
         position.push([startingPosition[0],columnNumber]);
     }
-    return position
+  } else {
+    for (let i = 1; i < length; i++) {
+      // find starting position row
+      let rowLetter = rowList[rowList.indexOf(startingPosition[0]) + i];
+      position.push([rowLetter,startingPosition[1]]);
+    }
+  return position
+  }
+}
+
+function checkColumn (allPositions) {
+  // 1 - 10 column identifiers
+  let allColumns = [];
+    for (let position of allPositions) {
+      allColumns.push(position[1]);
+    }
+    if (Math.max(...allColumns) < 11 && Math.min(...allColumns) > 0) {
+      return true;
+    }
+  return false;
+}
+
+function checkRow(allPositions) {
+  // a - j row identifiers
+  let allRows = [];
+  for (let position of allPositions) {
+    allRows.push(position[0]);
+  }
+
+  function isInRowList(rowPosition) {
+    return rowList.includes(rowPosition);
+    }
+  return allRows.every(isInRowList);
+}
+
+function checkDuplicates (allShips) {
+  let allPositions = [];
+  for (let [key, value] of Object.entries(allShips)) {
+    for (let position of value) {
+      allPositions.push(position);
+    }
+  }
+  let allPositionsString = allPositions.map(JSON.stringify);
+  let filteredSet = new Set(allPositionsString);
+  let filteredArray = Array.from(filteredSet);
+  
+  if (allPositions.length === filteredArray.length) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function checkPosition (allPositions) {
-  let allColumns = [];
-    for (let position of allPositions) {
-      allColumns.push(position[position.length - 1]);
-    }
-    if (Math.max(...allColumns) < 11) {
-      return true;
-    }
-    return false;
+  if (checkColumn(allPositions) && checkRow(allPositions)){
+    return true
+  }
+  return false
 }
 
-function placeShip (length) {
-  // pick a direction; up or down
-  // if the ship fits set the place
-  // if it doesn't fit, get a new starting point
-  const horizontal = false; //() => ((Math.random() < 0.5) >= 0.5) ? true : false;
-
-  if (horizontal === true) {
-    let shipPosition = setHorizontalPosition(length);
-    while (checkPosition(shipPosition) === false) {
-      shipPosition = setHorizontalPosition(length);
-    }
-    return shipPosition;
-  } else {
-    let shipPosition = setVerticalPosition(length);
-    if (checkPosition(shipPosition) === false) { // update to while loop
-      shipPosition = setVerticalPosition(length);
-    }
-    return shipPosition;
+function getPosition (length) {
+  let shipPosition = setPosition(length);
+  while (checkPosition(shipPosition) === false) {
+    shipPosition = setPosition(length);
   }
+  return shipPosition;
+}
+
+function placeShip () {
+  let allShips = {}
+  do { 
+    allShips = {  
+      carrier: getPosition(5),
+      battleship: getPosition(4),
+      destroyer: getPosition(3),
+      submarine: getPosition(3),
+      patrolBoat: getPosition(2)
+    }
+  } while (checkDuplicates(allShips) === false)  
+  return allShips;
 }
 
 export default placeShip;

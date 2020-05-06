@@ -20,5 +20,8 @@ test('ship isSunk', () => {
   let shotHits = playerOne.board.fleet.ships[4].position;
   playerOne.recieveAttack(shotHits[0][0],shotHits[0][1]);
   playerOne.recieveAttack(shotHits[1][0],shotHits[1][1]);
+  if (playerOne.board.fleet.isSunk(playerOne.board.fleet.ships[4]) === false) {
+    console.log(playerOne.board.fleet.ships[4]);
+  }
   expect(playerOne.board.fleet.isSunk(playerOne.board.fleet.ships[4])).toBe(true);
 });

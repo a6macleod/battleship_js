@@ -14,13 +14,34 @@ test('is a ship hit?', () => {
 
 test('is the ship sunk?', () => {
   let playerTwo = ship(2);
-  let hitOne = playerTwo.ships[4].position[0];
-  let hitTwo = playerTwo.ships[4].position[1];
 
-  // hit twice and sink the patrol boat
-  playerTwo.hit(hitOne[0],hitOne[1],playerTwo);
-  playerTwo.hit(hitTwo[0],hitTwo[1],playerTwo)
+  // hit the destroyer 3x to sink it
+  playerTwo.hit(playerTwo.ships[2].position[0][0], playerTwo.ships[2].position[0][1]);
+  playerTwo.hit(playerTwo.ships[2].position[1][0], playerTwo.ships[2].position[1][1]);
+  playerTwo.hit(playerTwo.ships[2].position[2][0], playerTwo.ships[2].position[2][1]);
+
+  // hit the submarine 3x to sink it
+  playerTwo.hit(playerTwo.ships[3].position[0][0], playerTwo.ships[3].position[0][1]);
+  playerTwo.hit(playerTwo.ships[3].position[1][0], playerTwo.ships[3].position[1][1]);
+  playerTwo.hit(playerTwo.ships[3].position[2][0], playerTwo.ships[3].position[2][1]);
+
+  // hit the patrol boat 2x to sink it
+  playerTwo.hit(playerTwo.ships[4].position[0][0], playerTwo.ships[4].position[0][1]);
+  playerTwo.hit(playerTwo.ships[4].position[1][0], playerTwo.ships[4].position[1][1]);
+
+  if (playerTwo.isSunk(playerTwo.ships[4]) === false) {
+    console.log(playerTwo.ships[4]);
+  }
+  if (playerTwo.isSunk(playerTwo.ships[3]) === false) {
+    console.log(playerTwo.ships[3]);
+  }
+  if (playerTwo.isSunk(playerTwo.ships[2]) === false) {
+    console.log(playerTwo.ships[2]);
+  }
+
   expect(playerTwo.isSunk(playerTwo.ships[4])).toBe(true);
+  expect(playerTwo.isSunk(playerTwo.ships[3])).toBe(true);
+  expect(playerTwo.isSunk(playerTwo.ships[2])).toBe(true);
 });
 
 test('place the ships', () => {
