@@ -25,3 +25,19 @@ test('ship isSunk', () => {
   }
   expect(playerOne.board.fleet.isSunk(playerOne.board.fleet.ships[4])).toBe(true);
 });
+
+test('all ships are sunk', () => {
+  let playerTwo = gameboard(1);
+  // const carrier = playerTwo.board.fleet.ships[0].position; // 5 positions
+  // const battleship = playerTwo.board.fleet.ships[1].position; // 4 positions
+  // const destroyer = playerTwo.board.fleet.ships[2].position; // 3 positions
+  // const submarine = playerTwo.board.fleet.ships[3].position; // 3 positions
+  // const patrolBoat = playerTwo.board.fleet.ships[4].position; // 2positions
+  for (let ship of playerTwo.board.fleet.ships) {
+    for (let position of ship.position) {
+      console.log(position[0], position[1]);
+      playerTwo.recieveAttack(position[0], position[1])
+    }
+  }
+  expect(playerTwo.allSunk()).toBe(true);
+});
