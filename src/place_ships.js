@@ -1,7 +1,6 @@
 import randomPoint from './random_point';
-import { rowList } from './row_list';
-
-// let allShips = {}
+// import { rowList } from './row_list';
+const rowList = ['a','b','c','d','e','f','g','h','i','j']
 
 function setPosition(length) {
   let startingPosition = randomPoint();

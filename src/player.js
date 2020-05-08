@@ -12,6 +12,8 @@ const player = (isComputer) => {
 
   function computerTurn() {
     playersTurn = true;
+    let row = generateRow();
+    let column = generateColumn();
     sendAttack(otherPlayer, "a", 1);
   }
   // function checkShot(otherPlayer, row, column) {

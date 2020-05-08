@@ -1,5 +1,4 @@
-import { rowList } from './row_list';
-// const rowList = ['a','b','c','d','e','f','g','h','i','j'];
+const rowList = ['a','b','c','d','e','f','g','h','i','j'];
 
 function randomPoint () {
   // find a random number 1-10 & random letter a-j
