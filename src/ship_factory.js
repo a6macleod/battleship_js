@@ -2,7 +2,7 @@ import React from 'react';
 import placeShip from './place_ships.js';
 
 // Ships: Carrier (5); Battleship (4); Destroyer (3); Submarine (3); Patrol Boat (2)
-const ship = (playerNumber) => {
+const ship = () => {
   const allShips = placeShip();
   const ships = [
       {

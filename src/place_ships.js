@@ -1,15 +1,10 @@
-const rowList = ['a','b','c','d','e','f','g','h','i','j'];
-let allShips = {}
+import randomPoint from './random_point';
+import { rowList } from './row_list';
 
-function newStartingPoint () {
-  // find a random number 1-10 & random letter a-j
-  const number = Math.floor(Math.random() * 10);
-  let row = rowList[Math.floor(Math.random()*rowList.length)];
-  return [row,number];
-}
+// let allShips = {}
 
 function setPosition(length) {
-  let startingPosition = newStartingPoint();
+  let startingPosition = randomPoint();
   let position = [startingPosition];
   const horizontal = () => ((Math.random() < 0.5) >= 0.5) ? true : false;
 

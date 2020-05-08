@@ -1,11 +1,10 @@
 import React from 'react';
 import ship from './ship_factory.js';
 
-const gameboard = (player) => {
+const gameboard = () => {
   // Gameboards should be able to report whether or not all of their ships have been sunk.
   const board = {
-    playerNumber: player,
-    fleet: ship(player),
+    fleet: ship(),
     missedLog: [],
     hitLog: []
   }

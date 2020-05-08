@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import ship from './ship_factory';
 
 test('is a ship hit?', () => {
-  let playerTwo = ship(2);
+  let playerTwo = ship();
   let shotHits = playerTwo.ships[0].position[0];
 
   // playerOne shoots at playerTwo
@@ -13,7 +13,7 @@ test('is a ship hit?', () => {
 });
 
 test('is the ship sunk?', () => {
-  let playerTwo = ship(2);
+  let playerTwo = ship();
 
   // hit the destroyer 3x to sink it
   playerTwo.hit(playerTwo.ships[2].position[0][0], playerTwo.ships[2].position[0][1]);
