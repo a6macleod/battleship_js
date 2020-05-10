@@ -1,5 +1,6 @@
 import React from 'react';
 import gameboard from './gameboard';
+import randomPoint from './random_point';
 
 const player = (isComputer) => {
   const computer = isComputer;
@@ -10,23 +11,40 @@ const player = (isComputer) => {
 
   const command = gameboard();
 
-  function computerTurn() {
-    playersTurn = true;
-    let row = generateRow();
-    let column = generateColumn();
-    sendAttack(otherPlayer, "a", 1);
-  }
-  // function checkShot(otherPlayer, row, column) {
-  //   if ()
-  // }
-
   function sendAttack(otherPlayer, row, column) {
-    if (otherPlayer.recieveAttack(row, column) === "hit") {
+    console.log(otherPlayer, row, column);
+    if (otherPlayer.command.recieveAttack(row, column) === "hit") {
       enemyHitLog.push([row,column]);
     } else {
       enemyMissLog.push([row,column]);
     }
   }
+
+  function checkLogs(log, attackPoint) {
+    for (let entry of log) {
+      if (entry[0] === attackPoint[0] || entry[1] === attackPoint[1]){
+        return true;
+      } else {
+      return false;
+      }
+    } 
+  }
+
+  function attackedSpaceAlready(attackPoint) {
+    // search enemyHitLog if attackPoint is already used
+    // search enemyMissLog if attackPoint is already used
+    return (checkLogs(enemyHitLog, attackPoint) || checkLogs(enemyMissLog, attackPoint));
+  }
+
+  function computerTurn(otherPlayer) {
+    playersTurn = true;
+    let attackPoint = randomPoint();
+    if (!attackedSpaceAlready(attackPoint)) {
+     sendAttack(otherPlayer, attackPoint[0], attackPoint[1]);
+    }
+    playersTurn = false;
+  }
+
   return {computer, computerTurn, playersTurn, enemyHitLog, enemyMissLog, command}
 }
 
