@@ -6,9 +6,9 @@ import player from "./player";
 test("computers turn", () => {
   const computerPlayer = player(true);
   const humanPlayer = player(false);
-  expect(computerPlayer.computer).toBe(true);
+  expect(computerPlayer.computer).toBeTruthy();
 
-  computerPlayer.computerTurn(humanPlayer);
+  computerPlayer.computerShoots(humanPlayer);
 
   function shotTaken() {
     return (
@@ -16,5 +16,5 @@ test("computers turn", () => {
       computerPlayer.enemyMissLog.length > 0
     );
   }
-  expect(shotTaken()).toBe(true);
+  expect(shotTaken()).toBeTruthy();
 });

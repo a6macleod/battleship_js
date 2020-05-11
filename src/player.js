@@ -4,7 +4,6 @@ import randomPoint from "./random_point";
 
 const player = (isComputer) => {
   const computer = isComputer;
-  let playersTurn = false;
   let enemyHitLog = [];
   let enemyMissLog = [];
 
@@ -36,19 +35,17 @@ const player = (isComputer) => {
     );
   }
 
-  function computerTurn(otherPlayer) {
-    playersTurn = true;
-    let attackPoint = randomPoint();
-    if (!attackedSpaceAlready(attackPoint)) {
+  function computerShoots(otherPlayer) {
+    let attackPoint = null;
+    do {
+      attackPoint = randomPoint();
+    } while (attackedSpaceAlready(attackPoint));
       sendAttack(otherPlayer, attackPoint[0], attackPoint[1]);
-    }
-    playersTurn = false;
   }
 
   return {
     computer,
-    computerTurn,
-    playersTurn,
+    computerShoots,
     enemyHitLog,
     enemyMissLog,
     command,

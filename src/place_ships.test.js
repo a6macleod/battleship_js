@@ -11,6 +11,7 @@ test("ships are bound within the board", () => {
     allColumns.push(ship.position[ship.position.length - 1][1]);
   }
   expect(Math.max(...allColumns)).toBeLessThan(11);
+  expect(Math.min(...allColumns)).toBeGreaterThan(0);
 
   // rows a-j
   let allRows = [];
@@ -23,7 +24,7 @@ test("ships are bound within the board", () => {
     return rowList.includes(rowPosition);
   }
 
-  expect(allRows.every(isInRowList)).toBe(true);
+  expect(allRows.every(isInRowList)).toBeTruthy();
 });
 
 test("Only 1 ship per space", () => {
@@ -48,5 +49,5 @@ test("Only 1 ship per space", () => {
   let filteredSet = new Set(allPositionsString);
   let filteredArray = Array.from(filteredSet);
 
-  expect(checkForDuplicates()).toBe(true);
+  expect(checkForDuplicates()).toBeTruthy();
 });

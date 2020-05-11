@@ -19,11 +19,8 @@ test("ship isSunk", () => {
   let shotHits = playerOne.board.fleet.ships[4].position;
   playerOne.recieveAttack(shotHits[0][0], shotHits[0][1]);
   playerOne.recieveAttack(shotHits[1][0], shotHits[1][1]);
-  if (playerOne.board.fleet.isSunk(playerOne.board.fleet.ships[4]) === false) {
-  }
-  expect(playerOne.board.fleet.isSunk(playerOne.board.fleet.ships[4])).toBe(
-    true
-  );
+
+  expect(playerOne.board.fleet.isSunk(playerOne.board.fleet.ships[4])).toBeTruthy();
 });
 
 test("all ships are sunk", () => {
@@ -34,5 +31,5 @@ test("all ships are sunk", () => {
       playerTwo.recieveAttack(position[0], position[1]);
     }
   }
-  expect(playerTwo.allSunk()).toBe(true);
+  expect(playerTwo.allSunk()).toBeTruthy();
 });

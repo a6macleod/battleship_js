@@ -7,9 +7,9 @@ test("is a ship hit?", () => {
   let shotHits = playerTwo.ships[0].position[0];
 
   // playerOne shoots at playerTwo
-  expect(playerTwo.hit("b", 15)).toBe(false);
+  expect(playerTwo.hit("b", 15)).toBeFalsy();
 
-  expect(playerTwo.hit(shotHits[0], shotHits[1])).toBe(true);
+  expect(playerTwo.hit(shotHits[0], shotHits[1])).toBeTruthy();
 });
 
 test("is the ship sunk?", () => {
@@ -53,9 +53,9 @@ test("is the ship sunk?", () => {
     playerTwo.ships[4].position[1][1]
   );
 
-  expect(playerTwo.isSunk(playerTwo.ships[4])).toBe(true);
-  expect(playerTwo.isSunk(playerTwo.ships[3])).toBe(true);
-  expect(playerTwo.isSunk(playerTwo.ships[2])).toBe(true);
+  expect(playerTwo.isSunk(playerTwo.ships[4])).toBeTruthy();
+  expect(playerTwo.isSunk(playerTwo.ships[3])).toBeTruthy();
+  expect(playerTwo.isSunk(playerTwo.ships[2])).toBeTruthy()
 });
 
 test("place the ships", () => {
