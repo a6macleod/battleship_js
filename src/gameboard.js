@@ -1,13 +1,13 @@
-import React from 'react';
-import ship from './ship_factory.js';
+import React from "react";
+import ship from "./ship_factory.js";
 
 const gameboard = () => {
   // Gameboards should be able to report whether or not all of their ships have been sunk.
   const board = {
     fleet: ship(),
     missedLog: [],
-    hitLog: []
-  }
+    hitLog: [],
+  };
 
   function allSunk() {
     let arrayOfSunkShips = [];
@@ -21,16 +21,16 @@ const gameboard = () => {
   }
 
   function recieveAttack(row, column) {
-    if (board.fleet.hit(row,column)) {
-      board.hitLog.push([row,column]);
+    if (board.fleet.hit(row, column)) {
+      board.hitLog.push([row, column]);
       allSunk();
-      return ('hit');
+      return "hit";
     } else {
-      board.missedLog.push([row,column]);
-      return ('miss');
+      board.missedLog.push([row, column]);
+      return "miss";
     }
   }
-  return { board, recieveAttack, allSunk }
-}
+  return { board, recieveAttack, allSunk };
+};
 
 export default gameboard;

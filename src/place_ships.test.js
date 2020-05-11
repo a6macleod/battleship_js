@@ -22,7 +22,7 @@ test("ships are bound within the board", () => {
   function isInRowList(rowPosition) {
     return rowList.includes(rowPosition);
   }
-  
+
   expect(allRows.every(isInRowList)).toBe(true);
 });
 
@@ -30,7 +30,7 @@ test("Only 1 ship per space", () => {
   // loop through the ships and make sure there are no duplicates
   let playerTwo = gameboard(2);
   let allPositions = [];
-  
+
   for (let ship of playerTwo.board.fleet.ships) {
     for (let spot of ship.position) {
       allPositions.push(spot);
@@ -47,6 +47,6 @@ test("Only 1 ship per space", () => {
   let allPositionsString = allPositions.map(JSON.stringify);
   let filteredSet = new Set(allPositionsString);
   let filteredArray = Array.from(filteredSet);
-  
+
   expect(checkForDuplicates()).toBe(true);
 });
