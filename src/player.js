@@ -47,17 +47,8 @@ const player = (isComputer) => {
       sendAttack(otherPlayer, attackPoint[0], attackPoint[1]);
   }
 
-  // function computerShoots(otherPlayer) {
-  //   let attackPoint = null;
-  //   do {
-  //     attackPoint = randomPoint();
-  //   } while (attackedSpaceAlready(attackPoint) === true);
-  //     sendAttack(otherPlayer, attackPoint[0], attackPoint[1]);
-  // }
-
   return {
     computer,
-    // computerShoots,
     enemyHitLog,
     enemyMissLog,
     command,

@@ -19,9 +19,3 @@ test('Round of turns for both players', () => {
   expect(shotTaken(newGame.computerPlayer)).toBeTruthy();
   expect(shotTaken(newGame.humanPlayer)).toBeTruthy();
 });
-
-test("The game ends", () => {
-  const newGame = game();
-  newGame.startGame();
-
-});
