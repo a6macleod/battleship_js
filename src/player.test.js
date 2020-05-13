@@ -8,7 +8,7 @@ test("computers turn", () => {
   const humanPlayer = player(false);
   expect(computerPlayer.computer).toBeTruthy();
 
-  computerPlayer.computerShoots(humanPlayer);
+  computerPlayer.shoots(humanPlayer);
 
   function shotTaken() {
     return (

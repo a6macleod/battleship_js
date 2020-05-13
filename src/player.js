@@ -35,20 +35,33 @@ const player = (isComputer) => {
     );
   }
 
-  function computerShoots(otherPlayer) {
+  function shoots(otherPlayer, row, column) {
     let attackPoint = null;
     do {
-      attackPoint = randomPoint();
-    } while (attackedSpaceAlready(attackPoint));
+      if (computer === true) {
+        attackPoint = randomPoint();
+      } else {
+        attackPoint = [row,column];
+      }
+    } while (attackedSpaceAlready(attackPoint) === true);
       sendAttack(otherPlayer, attackPoint[0], attackPoint[1]);
   }
 
+  // function computerShoots(otherPlayer) {
+  //   let attackPoint = null;
+  //   do {
+  //     attackPoint = randomPoint();
+  //   } while (attackedSpaceAlready(attackPoint) === true);
+  //     sendAttack(otherPlayer, attackPoint[0], attackPoint[1]);
+  // }
+
   return {
     computer,
-    computerShoots,
+    // computerShoots,
     enemyHitLog,
     enemyMissLog,
     command,
+    shoots,
   };
 };
 

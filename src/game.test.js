@@ -2,23 +2,26 @@ import game from "./game";
 
 test('Round of turns for both players', () => {
   const newGame = game();
-  // console.log(newGame.humanPlayer);
 
   expect(newGame.humanPlayer).not.toBeNull();
   expect(newGame.computerPlayer).not.toBeNull();
 
   newGame.computerTurn();
+  newGame.playerTurn();
 
-  function shotTaken(shooteringPlayer) {
+  function shotTaken(shootingPlayer) {
     return (
-      shooteringPlayer.enemyHitLog.length > 0 ||
-      shooteringPlayer.enemyMissLog.length > 0
+      shootingPlayer.enemyHitLog.length > 0 ||
+      shootingPlayer.enemyMissLog.length > 0
     );
   }
-  // computer shoots
-  newGame.computerTurn();
+  // computerPlayer & humanPlayer shot
   expect(shotTaken(newGame.computerPlayer)).toBeTruthy();
-  // player shoots
-  newGame.playerTurn();
   expect(shotTaken(newGame.humanPlayer)).toBeTruthy();
+});
+
+test("The game ends", () => {
+  const newGame = game();
+  newGame.startGame();
+
 });

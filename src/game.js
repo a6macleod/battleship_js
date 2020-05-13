@@ -4,16 +4,39 @@ import player from "./player";
 const game = () => {
   const humanPlayer = player(false);
   const computerPlayer = player(true);
+  let gameOver = false;
+
+  function isGameOver(enemy) {
+    if (enemy.command.allSunk) {
+      gameOver = true;
+    }
+  }
 
   function computerTurn() {
-    computerPlayer.computerShoots(humanPlayer);
+    computerPlayer.shoots(humanPlayer);
+  }
+
+  function getCoordinates() {
+
   }
 
   function playerTurn() {
-    humanPlayer.computerShoots(computerPlayer);
+    let shotCoords = getCoordinates() || ["a", 9]
+    humanPlayer.shoots(computerPlayer, shotCoords[0], shotCoords[1]);
   }
 
-  return { humanPlayer, computerPlayer, computerTurn, playerTurn };
+  function startGame() {
+    while (gameOver === false) {
+      playerTurn();
+      isGameOver(humanPlayer);
+      computerTurn();
+      isGameOver(computerPlayer);
+      // gameOver = true;
+    }
+    console.log("the Game ended!")
+  }
+
+  return { humanPlayer, computerPlayer, computerTurn, playerTurn, startGame };
 };
 
 export default game;
